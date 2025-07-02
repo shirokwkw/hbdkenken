@@ -26,8 +26,8 @@ const audioUrls = [
     "https://dl.dropboxusercontent.com/scl/fi/g1cir1larr2bx4conmocb/siomay.m4a?rlkey=ajzt9soqyo76qhqepcy41bj6q&st=k82jss76&dl=1",
     "https://dl.dropboxusercontent.com/scl/fi/vwgzg6ylf9yr3niuezc4q/paul.wav?rlkey=3vddpswscsvmhfox9jqqnoe8b&st=qfy7v6lv&dl=1",
     "https://dl.dropboxusercontent.com/scl/fi/cts422j8wdtz47yy7u9mx/kringg.mp3?rlkey=e9i4jjm2vprpsisfgyvwm3xqe&st=5shobvc7&dl=1",
-    "https://dl.dropboxusercontent.com/scl/fi/ku6gn532fqlz4nbimvk1r/cjj.mp3?rlkey=qy2k17xw08zd0eg0776vb5ygj&st=h8l7m7ms&dl=1", 
-    "https://dl.dropboxusercontent.com/scl/fi/psrdvhlwmud4cwc8mito7/cjjj.mp3?rlkey=h8jkbgzctego4uc6ac50mf7pw&st=mulj2vz8&dl=0"  
+    "https://dl.dropboxusercontent.com/scl/fi/psrdvhlwmud4cwc8mito7/cjjj.mp3?rlkey=h8jkbgzctego4uc6ac50mf7pw&st=3o1dc0fc&dl=1", 
+    "https://dl.dropboxusercontent.com/scl/fi/0nc8qgbg1jjz5e1uj8w16/didayy.m4a?rlkey=j7l3639vfjqsx0odyimdnr232&st=gzj2sxv8&dl=1"  
 ];
 
 const senderImageUrls = [

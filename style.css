@@ -1,0 +1,1008 @@
+/* Global CSS Variables: Eto yung colors and other common values, para madali palitan. */
+:root {
+    --bg-color: #AFFFAF; /* Main background color ng app (yung green). */
+    --plate-bg-color: #ccc; /* Color ng cake plate. */
+    --plate-shadow-color: #b3b3b3; /* Shadow ng plate. */
+    --layer-bg-color: #8B4513; /* Color ng cake layers (chocolate brown). */
+    --layer-shadow-color-1: #65320F;
+    --layer-shadow-color-2: #4A240A;
+    --icing-bg-color: #ffb3b3; /* Color ng icing (pink). */
+    --icing-before-bg-color: #ffe0e0;
+    --icing-before-shadow-color: #ffe0e0;
+    --drip-bg-color: #ffe0e0; /* Color ng icing drips. */
+    
+    /* Colors for the candle numbers. */
+    --number-color: #ff0000; /* Red color for the number. */
+    --number-outline-color: #000; /* Black outline for the number. */
+    
+    --flame-bg-color: orange; /* Color ng candle flame. */
+    --flame-shadow-color: rgba(255, 165, 0, 0.5); /* Shadow ng flame. */
+
+    /* Colors for the improved buttons (Cake/Cards): Same na as login buttons. */
+    --button-primary-bg: white; /* White background. */
+    --button-primary-hover: #E0BBE4; /* Soft lavender for hover effect. */
+    --button-text-color: var(--text-color); /* Dark green text. */
+    --button-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Button shadow. */
+
+    /* Login specific variables: Colors na for login screen lang. */
+    --login-primary-bg: #98ff98c5; /* Background color for login screen (light green). */
+    --outline-color: #154415;
+    --text-color: #002a00; /* Darker text color for login. */
+    --input-bg: #eaffea;
+    --login-button-bg: white;
+    --button-border: #064206;
+    --hover-bg: #98ff98c5; /* Light green for login buttons hover effect. */
+    --error-color: red; /* Color ng error message. */
+}
+
+/* Base styles for the whole page body. */
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color); /* Default background color. */
+    font-family: 'Inter', sans-serif; /* Using Inter font for general text. */
+    margin: 0;
+    overflow: hidden; /* Para hindi mag-scroll yung body. */
+    padding: 1rem;
+}
+
+/* General styling for each screen ng app, para sa smooth transitions. */
+.app-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease-in-out, visibility 0s linear 1s; /* Fade out, then hide visibility. */
+    box-sizing: border-box; /* Include padding sa width/height. */
+}
+
+/* Class to hide the screen. */
+.app-screen.hidden {
+    opacity: 0;
+    pointer-events: none; /* Can't click elements inside. */
+    visibility: hidden; /* Totally hidden. */
+}
+
+/* Specific z-indexes and backgrounds for each screen. */
+#loading-screen { 
+    z-index: 200; /* Highest at first. */
+    background-color: rgba(175, 255, 175, 0.8); 
+}
+#login-screen { 
+    z-index: 150; 
+    background-color: var(--login-primary-bg); 
+}
+#initial-cake-screen { 
+    z-index: 100; 
+    background-color: var(--bg-color); 
+}
+#message-cards-screen { 
+    z-index: 50; 
+    background-color: var(--bg-color); 
+    padding: 1rem; 
+}
+/* Navigation buttons container: Nasa bottom and hidden at first. */
+#nav-buttons-container { 
+    z-index: 50; 
+    position: fixed; 
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem; 
+    transition: opacity 1s ease-in-out, visibility 0s linear 1s; 
+}
+/* Make sure nav buttons are totally hidden when not in use. */
+#nav-buttons-container.hidden {
+    display: none;
+}
+
+/* Love Letter Screen Styles: Background is green na now. */
+#love-letter-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color); /* Changed from pink to main app green. */
+    font-family: 'Georgia', serif; 
+    overflow: auto; /* Allow content to scroll. */
+    z-index: 300; /* Highest z-index para matakpan lahat. */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 0s linear 1s;
+    box-sizing: border-box;
+    padding: 20px; 
+}
+
+/* Make the love letter screen visible. */
+#love-letter-screen.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in-out, visibility 0s linear 0s;
+}
+
+/* Wrapper for love letter content and image. */
+#love-letter-screen .main-wrapper {
+    position: relative;
+    width: 85%;
+    max-width: 550px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* Container for the letter itself. */
+#love-letter-screen .letter-container {
+    position: relative;
+    width: 100%; 
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px 35px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    z-index: 1;
+}
+
+/* Hover effect for the letter. */
+#love-letter-screen .letter-container:hover {
+    transform: rotate(-3deg) scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Top flap ng envelope. */
+#love-letter-screen .envelope-top {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 80px;
+    background-color: var(--login-primary-bg); /* Changed from pink to login primary green. */
+    border-radius: 10px 10px 0 0;
+    z-index: 1;
+}
+
+/* Container for the photo. */
+#love-letter-screen .photo-container-outer {
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    transform: translateX(-15%) rotate(4deg);
+    width: 90%;
+    max-width: 280px;
+    z-index: 2;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for the photo. */
+#love-letter-screen .photo-container-outer:hover {
+    transform: translateX(-15%) rotate(4deg) scale(1.03);
+}
+
+/* Photo frame. */
+#love-letter-screen .photo-frame {
+    width: 100%;
+    height: auto;
+    border: 8px solid #f0f0f0; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+/* Image inside the photo frame. */
+#love-letter-screen .photo-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Love letter content. */
+#love-letter-screen .love-letter-content {
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+    width: 100%;
+    z-index: 2;
+    margin-top: 80px;
+}
+
+#love-letter-screen .love-letter-content p {
+    margin-bottom: 1em;
+}
+
+/* Signature sa love letter. */
+#love-letter-screen .signature {
+    margin-top: 25px;
+    font-weight: bold;
+    text-align: right;
+    width: 100%;
+    font-size: 1.3em; 
+    font-family: 'Brush Script MT', cursive, sans-serif; 
+}
+
+/* Responsive adjustments for love letter screen sa smaller screens. */
+@media (max-width: 768px) {
+    #love-letter-screen .main-wrapper {
+        width: 95%;
+        max-width: 90%;
+        padding: 15px 0;
+    }
+    #love-letter-screen .letter-container {
+        padding: 10px 15px;
+        transform: rotate(-2deg);
+    }
+    #love-letter-screen .envelope-top {
+        top: -30px;
+        height: 60px;
+    }
+    #love-letter-screen .photo-container-outer {
+        width: 70%;
+        max-width: 180px;
+        top: 5px;
+        right: -5px;
+        transform: translateX(-10%) rotate(3deg);
+    }
+    #love-letter-screen .love-letter-content {
+        font-size: 0.9em;
+        margin-top: 70px;
+    }
+    #love-letter-screen .signature {
+        margin-top: 20px;
+        font-size: 1.1em; 
+    }
+}
+
+/* --- Login Screen Styles --- */
+#login-screen .container {
+    display: flex;
+    flex-direction: row; /* Default for larger screens. */
+    align-items: center;
+    justify-content: space-between;
+    width: 600px; /* Fixed width for larger screens. */
+    padding: 20px;
+    background: white;
+    border: 2px solid var(--button-border);
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    /* Responsive adjustments for smaller screens. */
+    @media (max-width: 768px) {
+        width: 95%; /* Make it almost full width sa small screens. */
+        flex-direction: column; /* Stack items vertically sa small screens. */
+        justify-content: center; /* Center content when stacked. */
+        padding: 15px; /* Slightly less padding sa small screens. */
+    }
+}
+
+/* Illustration sa login screen. */
+#login-screen .illustration {
+    flex: 1;
+    height: 300px;
+    width: 300px; /* Keep the square shape. */
+    background: url('https://media1.tenor.com/images/c791bb336c2ab8e31c97f604c8bc6dcb/tenor.gif?itemid=16517348') no-repeat center center;
+    background-size: contain; /* Make sure the whole image fits inside the container. */
+    border: 0px solid var(--button-border); /* Thinner border. */
+    border-radius: 12px; /* Slightly rounded corners. */
+    margin-right: 20px; /* Space sa right for larger screens. */
+
+    /* Responsive adjustments for smaller screens. */
+    @media (max-width: 768px) {
+        display: none; /* Hide illustration sa small screens. */
+        margin-right: 0; /* Remove margin when hidden. */
+        margin-bottom: 20px; /* Add space below kung magpakita man, though hidden naman. */
+    }
+}
+
+/* PIN section sa login screen. */
+#login-screen .pin-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 350px;
+    gap: -10px; /* Add 5px gap between elements. */
+
+    /* Responsive adjustments for smaller screens. */
+    @media (max-width: 768px) {
+        width: 100%; /* Take full width sa small screens. */
+        height: auto; /* Adjust height automatically. */
+        gap: 10px; /* Adjust gap for better spacing sa small screens. */
+    }
+}
+
+/* PIN display text. */
+#login-screen h2 {
+    width: 100%;
+    height: 40px;
+    font-size: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-weight: 900; /* Make font weight stronger for bolder text. */
+    color: var(--text-color);
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    letter-spacing: 2px;
+    caret-color: transparent;
+    position: relative;
+    margin-top: 20px; /* Move "Enter Passcode" down by 10px. */
+}
+
+#login-screen h2::after {
+    content: attr(data-placeholder);
+    font-weight: 900; /* Match the boldness of the entered text. */
+    color: #002a00; /* Darker color para mas visible. */
+    opacity: 1; /* Fully opaque for showy text. */
+}
+
+/* Buttons for the numeric keypad. */
+#login-screen .buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#login-screen .buttons button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    background: var(--login-button-bg);
+    border: 2px solid var(--button-border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600; /* Slightly bolder numbers. */
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for login buttons. */
+#login-screen .buttons button:hover {
+    background: var(--hover-bg); /* Light green background on hover. */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styles for Enter and Backspace buttons sa login. */
+#login-screen .buttons .enter, #login-screen .buttons .backspace {
+    background: var(--login-button-bg);
+    border: 2px solid var(--button-border);
+}
+
+/* Error message styling. */
+#login-screen .error {
+    color: var(--error-color);
+    font-size: 0.8rem;
+    display: none;
+}
+
+/* Shake animation for error. */
+#login-screen .shake {
+    animation: shake 0.3s;
+}
+
+/* Keyframes for shake animation. */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* --- Cake Screen Styles --- */
+.cake {
+    position: relative; /* Keep it relative for inner elements. */
+    width: 250px;
+    height: 200px;
+    margin-top: 0; 
+}
+
+/* Cake plate. */
+.plate {
+    width: 270px;
+    height: 110px;
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    background-color: var(--plate-bg-color);
+    border-radius: 50%;
+    box-shadow: 0 2px 0 var(--plate-shadow-color), 0 4px 0 var(--plate-shadow-color), 0 5px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* All elements inside the cake are absolute position. */
+.cake > * {
+    position: absolute;
+}
+
+/* Cake layers. */
+.layer {
+    position: absolute;
+    display: block;
+    width: 250px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--layer-bg-color);
+    box-shadow: 0 2px 0px var(--layer-shadow-color-1),
+                    0 4px 0px var(--layer-shadow-color-2),
+                    0 6px 0px var(--layer-shadow-color-2),
+                    0 8px 0px var(--layer-shadow-color-2),
+                    0 10px 0px var(--layer-shadow-color-2),
+                    0 12px 0px var(--layer-shadow-color-2),
+                    0 14px 0px var(--layer-shadow-color-2),
+                    0 16px 0px var(--layer-shadow-color-2),
+                    0 18px 0px var(--layer-shadow-color-2),
+                    0 20px 0px var(--layer-shadow-color-2),
+                    0 22px 0px var(--layer-shadow-color-2),
+                    0 24px 0px var(--layer-shadow-color-2),
+                    0 26px 0px var(--layer-shadow-color-2),
+                    0 28px 0px var(--layer-shadow-color-2),
+                    0 30px 0px var(--layer-shadow-color-2);
+}
+
+.layer-top {
+    top: 0px;
+}
+
+.layer-middle {
+    top: 33px;
+}
+
+.layer-bottom {
+    top: 66px;
+}
+
+/* Cake icing. */
+.icing {
+    top: 2px;
+    left: 5px;
+    background-color: var(--icing-bg-color);
+    width: 240px;
+    height: 90px;
+    border-radius: 50%;
+}
+.icing:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    bottom: 6px;
+    left: 5px;
+    background-color: var(--icing-before-bg-color);
+    box-shadow: 0 0 4px var(--icing-before-shadow-color),
+                    0 0 4px var(--icing-before-shadow-color),
+                    0 0 4px var(--icing-before-shadow-color);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Icing drips. */
+.drip {
+    display: block;
+    width: 50px;
+    height: 60px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: var(--drip-bg-color);
+}
+
+.drip1 {
+    top: 53px;
+    left: 5px;
+    transform: skewY(15deg);
+    height: 48px;
+    width: 40px;
+}
+
+.drip2 {
+    top: 69px;
+    left: 181px;
+    transform: skewY(-15deg);
+}
+
+.drip3 {
+    top: 54px;
+    left: 90px;
+    width: 80px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    
+}
+
+/* Flicker animation for the candle flame. */
+@keyframes flicker {
+    0% {
+        transform: skewX(5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.2), 0 0 20px rgba(255, 165, 0, 0.2), 0 0 60px rgba(255, 165, 0, 0.2), 0 0 80px rgba(255, 165, 0, 0.2);
+    }
+    25% {
+        transform: skewX(-5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+    }
+    50% {
+        transform: skewX(10deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.3), 0 0 20px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 165, 0, 0.3), 0 0 80px rgba(255, 165, 0, 0.3);
+    }
+    75% {
+        transform: skewX(-10deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.4), 0 0 20px rgba(255, 165, 0, 0.4), 0 0 60px rgba(255, 165, 0, 0.4), 0 0 80px rgba(255, 165, 0, 0.4);
+    }
+    100% {
+        transform: skewX(5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+    }
+}
+
+/* Container for the number candle. */
+.number-candle {
+    position: absolute;
+    width: 40px; /* Base width of each digit. */
+    height: 100px; /* Increased height to fit digit, tip, and flame. */
+    background-color: transparent; /* No background. */
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    display: block; 
+    box-shadow: none; 
+    z-index: 2;
+
+    transform-style: preserve-3d;
+    perspective: 100px;
+    background-image: none; 
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+/* Adjusted positions for '2' and '4' to adjust spacing. */
+#candle2 {
+    left: 53%; /* Moved to center. */
+    top: -20px; 
+    transform: translateX(-50px) rotateY(-5deg); /* Moved '2' to the left. */
+}
+
+#candle4 {
+    margin-left: 1px; 
+    left: 42%; /* Moved to center. */
+    top: -20px; 
+    transform: translateX(10px) rotateY(5deg); /* Moved '4' to the right. */
+}
+
+/* Styling for the candle digit. */
+.number-candle .digit {
+    font-family: 'Nunito', sans-serif; /* Changed font family to Nunito. */
+    font-size: 70px; 
+    color: var(--number-color); 
+    text-shadow:
+        -1px -1px 0 var(--number-outline-color),  
+        1px -1px 0 var(--number-outline-color),
+        -1px 1px 0 var(--number-outline-color),
+        1px 1px 0 var(--number-outline-color),
+        2px 2px 2px rgba(0, 0, 0, 0.3); /* Added shadow for a thicker, candle-like body. */
+    line-height: 1; 
+    position: absolute; 
+    bottom: 0; /* Positioned at the bottom of the .number-candle container. */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5; /* Behind the tip and flame. */
+}
+
+/* Styling for the candle tip (wick). */
+.number-candle .candle-tip {
+    width: 3px; 
+    height: 13px; 
+    background-color: #333; /* Dark gray/black for wick color. */
+    border-radius: 1px; 
+    position: absolute; 
+    left: 50%; /* Horizontally centered. */
+    transform: translateX(-50%); /* Make sure it's perfectly centered. */
+    z-index: 10; /* On top of the digit. */
+}
+
+/* Specific positioning for candle tip ng '2'. */
+#tip2 {
+    height: 13px;
+    bottom: 62px; 
+}
+
+/* Specific positioning for candle tip ng '4'. */
+#tip4 {
+    left: 27px;
+    bottom: 62px; 
+}
+
+
+/* Generic styling for the candle flame. */
+.number-candle .flame {
+    position: absolute; 
+    width: 12px;
+    height: 25px;
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 10px var(--flame-shadow-color);
+    animation: flicker 1s ease-in-out infinite alternate;
+    z-index: 15; /* Highest z-index for the flame. */
+    left: 50%; /* Horizontally centered. */
+    transform: translateX(-50%); /* Make sure it's perfectly centered. */
+}
+
+/* Specific positioning for flame ng '2'. */
+#flame2 {
+    left: 15px;
+    bottom: 70px; 
+    background-color: var(--flame-bg-color); /* Apply the color here. */
+}
+
+/* Specific positioning for flame ng '4'. */
+#flame4 {
+    bottom: 69px; 
+    background-color: var(--flame-bg-color); /* Apply the color here. */
+}
+
+/* Hide the flame when the candle is "out" na. */
+.number-candle.out .flame {
+    display: none;
+}
+
+/* Container for action controls below the cake. */
+.cake-action-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; /* Space between cake and controls. */
+}
+
+/* Styles for "Allow Mic" and "Go to Cards" buttons. */
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--button-text-color); /* Use the button text color variable. */
+    background-color: var(--button-primary-bg); /* Use the button primary background variable. */
+    border: 2px solid var(--button-border); /* Added border like login buttons. */
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: var(--button-shadow);
+    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.5s ease;
+    opacity: 0; /* Hidden by default. */
+    pointer-events: none; /* Not clickable by default. */
+}
+/* Hover effect for action buttons. */
+.action-button:hover {
+    background-color: var(--button-primary-hover); /* Use the button primary hover variable (soft lavender). */
+    transform: scale(1.05);
+}
+/* Make the action button visible. */
+.action-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+/* Totally hide the action button. */
+.action-button.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none; /* Totally remove from layout. */
+}
+/* Specific style for "Go to Messages" button (yung round na may arrow). */
+#go-to-cards-button {
+    width: 3.5rem; /* Fixed width. */
+    height: 3.5rem; /* Fixed height for a perfect circle. */
+    border-radius: 50%; /* Perfect circle. */
+    padding: 0; /* No inner padding para ma-center yung SVG. */
+    display: flex; /* Make sure it's flex para ma-center yung SVG. */
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-primary-bg); /* Use the button primary background variable. */
+    border: 2px solid var(--button-border); /* Added border like login buttons. */
+    margin-top: 20px; /* Space between guide text and this button. */
+}
+/* Hover effect for go-to-cards button. */
+#go-to-cards-button:hover {
+    background-color: var(--button-primary-hover); /* Use the button primary hover variable (soft lavender). */
+}
+/* Icon sa go-to-cards button. */
+#go-to-cards-button svg {
+    width: 1.5rem; /* Icon size. */
+    height: 1.5rem;
+    color: var(--button-text-color); /* Changed to use the button text color variable. */
+}
+
+/* Styles for the guiding text. */
+.guide-text {
+    text-align: center;
+    margin-top: 10px; /* Space between title and guide. */
+    margin-bottom: 20px; /* Space between guide and cake/buttons. */
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem; /* Slightly bigger font. */
+    font-weight: 500; /* Medium weight. */
+    color: #6a0545; /* Dark pink/purple. */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+/* Make the guide text visible. */
+.guide-text.visible {
+    opacity: 1;
+}
+/* Totally hide the guide text. */
+.guide-text.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none; /* Totally remove from layout. */
+}
+
+/* --- Loading Screen Styles --- */
+#loading-screen {
+    color: black; /* Changed color to black for loader text. */
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+}
+
+/* CSS for loader animation. */
+.loader {
+    font-weight: bold;
+    font-family: monospace;
+    display: inline-grid;
+    font-size: 30px;
+}
+.loader:before,
+.loader:after {
+    content:"Loading...";
+    grid-area: 1/1;
+    -webkit-mask-size: 100% 5px,100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    animation: l35-1 1s infinite;
+}
+.loader:before {
+    -webkit-mask-image:
+        linear-gradient(#000 0 0),
+        linear-gradient(#000 0 0);
+}
+.loader:after {
+    -webkit-mask-image:
+        linear-gradient(#000 0 0);
+    animation:
+        l35-1  1s infinite,
+        l35-2 .2s infinite cubic-bezier(0.5,200,0.5,-200);
+}
+
+/* Keyframes for loader animation. */
+@keyframes l35-1{
+    0%    {-webkit-mask-position:0 20px,0 0}
+    20%   {-webkit-mask-position:0 8px ,0 0}
+    40%   {-webkit-mask-position:0 100%,0 0}
+    60%   {-webkit-mask-position:0 3px ,0 0}
+    80%   {-webkit-mask-position:0 15px,0 0}
+    100%  {-webkit-mask-position:0 0    ,0 0}
+}
+@keyframes l35-2{
+    100% {transform:translate(0.1px)} 
+}
+
+
+/* CSS from Message Card Code (Combined and Adjusted). */
+/* Container for cards to enable 3D transformations. */
+.card-stack-container {
+    position: relative;
+    width: 100%;
+    max-width: 28rem; /* Limit the width of the card area. */
+    min-height: 70vh; /* Make the container taller for visual space ng cards. */
+    perspective: 1000px; /* For 3D effect. */
+    overflow: hidden; /* Hide cards outside the view. */
+    display: flex;
+    justify-content: center; /* Center cards horizontally. */
+    align-items: center; /* Center cards vertically. */
+    flex-grow: 1; /* Allow container to grow and take available space. */
+    margin-top: 1rem; /* Space from the top. */
+    margin-bottom: 1rem; /* Space from the bottom. */
+    
+    /* Removed default opacity and pointer-events, controlled na now by .active-cards. */
+}
+/* Make the card stack container active. */
+.card-stack-container.active-cards {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 1s ease-in; /* Keep the transition here for fade-in. */
+}
+
+/* Styling for each card. */
+.message-card {
+    position: absolute;
+    top: 50%; /* Center vertically. */
+    left: 50%; /* Center horizontally. */
+    transform: translate(-50%, -50%); /* Adjust for centering. */
+    width: 90%; /* Make cards wider inside the container. */
+    max-width: 28rem; /* Maximum width for individual cards. */
+    height: 500px; /* FIXED HEIGHT for all cards. */
+    background-color: white;
+    border-radius: 1.5rem; /* rounded-3xl. */
+    padding: 1rem; /* Reduced padding for a thinner "white canvas" effect. */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* shadow-xl. */
+    opacity: 0; /* Hidden at first. */
+    /* Add transition for all changing properties. */
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* Removed z-index transition here. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backface-visibility: hidden; /* To prevent flickering. */
+    transform-origin: center center; /* Make sure transformations are from the center. */
+    border: 2px solid #000000; /* Black outline for all cards. */
+    overflow-y: auto; /* Allow content to scroll if it overflows fixed height. */
+}
+
+/* Specific styling for audio cards to manage layout. */
+.message-card.audio-card {
+    padding: 1rem; /* Consistent padding for audio cards. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically. */
+    align-items: center;
+}
+
+.message-card.audio-card .media-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Allow content to take available space. */
+    padding: 0.5rem; /* Inner padding for media content inside the audio card. */
+    background-color: #f8fafc; /* Light background for the content area. */
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative; /* For correct positioning of children. */
+    overflow: hidden; /* Hide overflow for content inside. */
+}
+
+.message-card.audio-card .sender-image-wrapper {
+    position: relative;
+    width: 100%;
+    flex-grow: 1; /* Allow image to grow. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.75rem; /* Rounded corners for image area. */
+    background-color: #e0e7ff; /* Lighter background for image area. */
+    margin-bottom: 0.75rem; /* Space below image. */
+}
+
+.message-card.audio-card .sender-image {
+    width: 80%; /* Smaller image for a more focused look. */
+    height: 80%; /* Maintain aspect ratio. */
+    object-fit: contain; /* Make sure the whole image is visible. */
+    border-radius: 0.5rem; /* Rounded corners for the image itself. */
+}
+/* Added onerror for fallback image. */
+.message-card.audio-card .sender-image[src="https://placehold.co/400x400/e0e0e0/333333?text=Image+Error"] {
+    object-fit: contain; /* Make sure placeholder text is visible. */
+}
+        
+.message-card.audio-card .sender-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem; /* Bigger font size for the name. */
+    font-weight: 700; /* Bolder. */
+    color: #4a004a; /* Dark purple. */
+    margin-bottom: 0.5rem; /* Space below the name. */
+    text-align: center;
+    width: 100%;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.message-card.audio-card audio {
+    width: 95%; /* Adjust audio controls width for inner padding. */
+    margin-top: 0.5rem; /* Space above audio controls. */
+    flex-shrink: 0;
+}
+
+/* Active card: visible and in front. */
+.message-card.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(0) scale(1);
+    z-index: 20;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* No delay sa z-index. */
+}
+
+/* Preview cards (previous/next) - Make sure subtle side borders are visible. */
+.message-card.previous {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) translateX(-22%) scale(0.9); /* Slightly adjusted translateX. */
+    z-index: 10;
+}
+
+.message-card.next {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) translateX(22%) scale(0.9); /* Slightly adjusted translateX. */
+    z-index: 10;
+}
+
+/* Classes for slide-out/slide-in effects. */
+.message-card.slide-out-left {
+    transform: translate(-50%, -50%) translateX(-150%) scale(0.8); /* Further slide out. */
+    opacity: 0;
+    z-index: 0;
+}
+
+.message-card.slide-out-right {
+    transform: translate(-50%, -50%) translateX(150%) scale(0.8); /* Further slide out. */
+    opacity: 0;
+    z-index: 0;
+}
+
+/* Styling for circular navigation buttons. */
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem; /* Fixed width. */
+    height: 3.5rem; /* Fixed height for a perfect circle. */
+    background-color: var(--button-primary-bg); /* Use the button primary background variable. */
+    color: var(--button-text-color); /* Use the button text color variable. */
+    border-radius: 50%; /* Make it a perfect circle. */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 2px solid var(--button-border); /* Added border like login buttons. */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; /* Added opacity and visibility for smooth hide/show. */
+    cursor: pointer;
+}
+/* Hover effect for navigation buttons. */
+.nav-button:hover {
+    background-color: var(--button-primary-hover); /* Use the button primary hover variable (soft lavender). */
+    transform: scale(1.05); /* Slightly bigger on hover. */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+/* Disabled state for navigation buttons. */
+.nav-button:disabled {
+    background-color: #d1d5db; /* Lighter gray when disabled. */
+    cursor: not-allowed;
+    transform: scale(1);
+    box-shadow: none;
+}
+
+/* New class to totally hide the navigation button. */
+.nav-button.hidden-nav-button {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}

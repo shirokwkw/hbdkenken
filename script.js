@@ -184,7 +184,7 @@ function isBlowing() {
     }
     // Adjusted threshold for blowing sensitivity.
     let average = sum / bufferLength;
-    let threshold = 80; // This is the threshold value (adjusted to be less sensitive).
+    let threshold = 10; // This is the threshold value (adjusted to be less sensitive).
     return average > threshold;
 }
 
@@ -929,3 +929,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+

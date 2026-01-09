@@ -174,18 +174,22 @@ let blowInterval; // Interval to check if someone is blowing.
 // Function to check for blowing (microphone input).
 function isBlowing() {
     if (!analyser) return false;
-    const bufferLength = analyser.frequencyBinCount;
+
+    const bufferLength = analyser.fftSize;
     const dataArray = new Uint8Array(bufferLength);
-    analyser.getByteFrequencyData(dataArray);
+    analyser.getByteTimeDomainData(dataArray);
 
     let sum = 0;
     for (let i = 0; i < bufferLength; i++) {
-        sum += dataArray[i];
+        const value = dataArray[i] - 128;
+        sum += value * value;
     }
-    // Adjusted threshold for blowing sensitivity.
-    let average = sum / bufferLength;
-    let threshold = 10; // This is the threshold value (adjusted to be less sensitive).
-    return average > threshold;
+
+    const rms = Math.sqrt(sum / bufferLength);
+
+    // 🔥 Adjust sensitivity here
+    const threshold = 15; // 10–20 works well on mobile
+    return rms > threshold;
 }
 
 // Function to blow out candles.
@@ -929,4 +933,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
